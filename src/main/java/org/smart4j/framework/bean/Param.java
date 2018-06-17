@@ -3,6 +3,7 @@ package org.smart4j.framework.bean;
 import java.util.Map;
 
 import org.smart4j.framework.util.CastUtil;
+import org.smart4j.framework.util.CollectionUtil;
 
 public class Param {
 
@@ -34,6 +35,10 @@ public class Param {
 
 	public double getDouble(String name) {
 		return CastUtil.castDouble(paramMap.get(name));
+	}
+
+	public boolean isEmpty() {
+		return CollectionUtil.isEmpty(paramMap);
 	}
 
 }

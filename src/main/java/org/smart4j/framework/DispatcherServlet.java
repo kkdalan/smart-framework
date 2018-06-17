@@ -82,7 +82,13 @@ public class DispatcherServlet extends HttpServlet {
 
 			Param param = new Param(paramMap);
 			Method actionMethod = handler.getActionMethod();
-			Object result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+			Object result;
+			if (param.isEmpty()) {
+				result = ReflectionUtil.invokeMethod(controllerBean, actionMethod);
+			} else {
+				result = ReflectionUtil.invokeMethod(controllerBean, actionMethod, param);
+			}
+
 			if (result instanceof View) {
 				View view = (View) result;
 				String path = view.getPath();
@@ -97,11 +103,11 @@ public class DispatcherServlet extends HttpServlet {
 						request.getRequestDispatcher(ConfigHelper.getAppJspPath() + path).forward(request, response);
 					}
 				}
-				
+
 			} else if (result instanceof Data) {
 				Data data = (Data) result;
 				Object model = data.getModel();
-				if(model != null) {
+				if (model != null) {
 					response.setContentType("application/json");
 					response.setCharacterEncoding("UTF-8");
 					PrintWriter writer = response.getWriter();
