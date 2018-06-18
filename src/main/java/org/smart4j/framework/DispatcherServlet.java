@@ -22,6 +22,7 @@ import org.smart4j.framework.helper.BeanHelper;
 import org.smart4j.framework.helper.ConfigHelper;
 import org.smart4j.framework.helper.ControllerHelper;
 import org.smart4j.framework.helper.RequestHelper;
+import org.smart4j.framework.helper.ServletHelper;
 import org.smart4j.framework.helper.UploadHelper;
 import org.smart4j.framework.util.JsonUtil;
 import org.smart4j.framework.util.ReflectionUtil;
@@ -46,7 +47,16 @@ public class DispatcherServlet extends HttpServlet {
 
 	@Override
 	public void service(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		ServletHelper.init(request, response);
+		try {
+			process(request, response);
+		} finally {
+			ServletHelper.destroy();
+		}
+	}
 
+	private void process(HttpServletRequest request, HttpServletResponse response)
+			throws IOException, ServletException {
 		String requestMethod = request.getMethod().toLowerCase();
 		String requestPath = request.getPathInfo();
 
