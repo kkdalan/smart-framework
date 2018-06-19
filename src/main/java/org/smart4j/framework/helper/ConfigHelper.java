@@ -9,6 +9,14 @@ public final class ConfigHelper {
 
 	private static final Properties CONFIG_PROPS = PropsUtil.loadProps(ConfigConstant.CONFIG_FILE);
 
+	public static String getString(String key) {
+		return PropsUtil.getString(CONFIG_PROPS, key);
+	}
+	
+	public static Boolean getBoolean(String key) {
+		return PropsUtil.getBoolean(CONFIG_PROPS, key);
+	}
+	
 	public static String getJdbcDriver() {
 		return PropsUtil.getString(CONFIG_PROPS, ConfigConstant.JDBC_DRIVER);
 	}
