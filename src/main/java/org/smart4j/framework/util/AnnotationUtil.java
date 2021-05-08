@@ -5,7 +5,7 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Map;
 
-public class AnnotationUtils {
+public class AnnotationUtil {
 
 	private static final String ANNOTATIONS = "annotations";
 	private static final String ANNOTATION_DATA = "annotationData";
