@@ -5,7 +5,7 @@ import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
 
-public class PrintUtils {
+public class PrintUtil {
 
   public static String formatAsTable(List<String> headers, List<List<String>> rows) {
     int[] maxLengths = new int[rows.get(0).size()];
