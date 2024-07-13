@@ -1,4 +1,4 @@
-package org.smart4j.framework.util.table;
+package org.smart4j.framework.util.ds.table;
 
 import java.util.LinkedHashMap;
 import java.util.Map;
