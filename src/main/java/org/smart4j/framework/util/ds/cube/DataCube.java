@@ -5,7 +5,6 @@ import java.util.stream.Collectors;
 
 import org.smart4j.framework.util.PrintUtil;
 import org.smart4j.framework.util.ds.table.DataTable;
-import org.smart4j.framework.util.ds.table.DataTableUtil;
 
 public class DataCube {
 
@@ -98,8 +97,7 @@ public class DataCube {
 	public void print() {
 		for (DataLayer layer : layers().asList()) {
 			System.out.println("Layer: " + layer.getLayerName());
-			PrintUtil.printAsTable(layer.getLayerData().columnNames(),
-					DataTableUtil.convertDataTableToList(layer.getLayerData()));
+			PrintUtil.printAsTable(layer.getLayerData().columnNames(), layer.getLayerData().asList());
 		}
 	}
 }

@@ -1,5 +1,6 @@
 package org.smart4j.framework.util.ds.table;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -115,7 +116,32 @@ public class DataTable {
 
 	public void print() {
 		System.out.println(tableName + ":");
-		PrintUtil.printAsTable(columnNames(), DataTableUtil.convertDataTableToList(this));
+		PrintUtil.printAsTable(columnNames(), asList());
+	}
+	
+	public List<List<String>> asList() {
+		return convertToList(this);
+	}
+	
+	private static List<List<String>> convertToList(DataTable dataTable) {
+		List<List<String>> resultList = new ArrayList<>();
+
+		// Get column names as the first row
+		List<String> headers = dataTable.columnNames();
+		resultList.add(headers);
+
+		// Iterate through each row in the DataTable
+		for (int rowIndex = 0; rowIndex < dataTable.rows().size(); rowIndex++) {
+			List<String> rowData = new ArrayList<>();
+			// Get data for each column in the current row
+			for (int colIndex = 0; colIndex < headers.size(); colIndex++) {
+				Object value = dataTable.getValue(rowIndex, colIndex);
+				rowData.add(value != null ? value.toString() : "");
+			}
+			resultList.add(rowData);
+		}
+
+		return resultList;
 	}
 
 }
