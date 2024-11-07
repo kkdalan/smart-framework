@@ -128,7 +128,6 @@ public class DataTable {
 
 		// Get column names as the first row
 		List<String> headers = dataTable.columnNames();
-		resultList.add(headers);
 
 		// Iterate through each row in the DataTable
 		for (int rowIndex = 0; rowIndex < dataTable.rows().size(); rowIndex++) {

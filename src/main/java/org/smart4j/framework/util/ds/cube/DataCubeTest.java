@@ -50,7 +50,7 @@ public class DataCubeTest {
 		dt2.columns().add("ProductID");
 		dt2.columns().add("ProductName");
 		dt2.columns().add("Price");
-
+		
 		// Add data to the second layer
 		DataRow dr2 = dt2.newRow();
 		dr2.setValue("ProductID", 101);
