@@ -55,5 +55,10 @@ public class OrderEventHandler extends AbstractEventHandler<OrderState> {
 			break;
 		}
 	}
+	
+	@Override
+	protected OrderState getErrorState() {
+		return OrderState.ERROR;
+	}
 
 }

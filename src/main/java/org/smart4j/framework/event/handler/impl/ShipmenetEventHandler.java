@@ -34,5 +34,10 @@ public class ShipmenetEventHandler extends AbstractEventHandler<ShipmentState> {
 			break;
 		}
 	}
+	
+	@Override
+	protected ShipmentState getErrorState() {
+		return ShipmentState.ERROR;
+	}
 
 }

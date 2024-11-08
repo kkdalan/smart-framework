@@ -5,4 +5,5 @@ public enum CustomerState implements State{
     ACTIVE,       // 活躍
     UPDATED,      // 已更新
     DELETED,      // 已刪除
+    ERROR,        // 錯誤
 }

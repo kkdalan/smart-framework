@@ -9,7 +9,7 @@ import java.util.concurrent.TimeUnit;
 
 import org.smart4j.framework.event.collector.EventStatisticsCollector;
 import org.smart4j.framework.event.handler.EventHandler;
-import org.smart4j.framework.event.handler.impl.NoOpEventHandler;
+import org.smart4j.framework.event.handler.impl.UnsupportedEventHandler;
 import org.smart4j.framework.event.manager.EventManager;
 import org.smart4j.framework.event.model.Event;
 import org.smart4j.framework.event.model.EventStatistics;
@@ -87,7 +87,7 @@ public class AbstractStateEventManager<S extends State> implements EventManager 
 	}
 	
 	private EventHandler getEventHandler(EventType eventType) {
-		return eventHandlers.getOrDefault(eventType, new NoOpEventHandler());
+		return eventHandlers.getOrDefault(eventType, UnsupportedEventHandler.getInstance());
 	}
 
 	// 獲取事件統計資料

@@ -12,6 +12,7 @@ public class PrintUtil {
 	}
 
 	private static String formatAsTable(List<String> headers, List<List<String>> rows) {
+		
 		int[] maxLengths = new int[rows.get(0).size()];
 		for (List<String> row : rows) {
 			for (int i = 0; i < row.size(); i++) {
@@ -21,26 +22,32 @@ public class PrintUtil {
 		}
 
 		StringBuilder result = new StringBuilder();
-		// build row format
+		
+		// Build row format
 		int space = 2;
 		StringBuilder formatBuilder = new StringBuilder();
 		for (int maxLength : maxLengths) {
 			formatBuilder.append("%-").append(maxLength + space).append("s");
 		}
 		String format = formatBuilder.toString();
-		// make line
+	
+		// Make line
 		int headerLineLength = Arrays.stream(maxLengths).map(maxLength -> maxLength + space).sum();
 		String headerLine = StringUtils.repeat("-", headerLineLength);
-		// append header with lines
+	
+		// Append header with lines
 		result.append(headerLine).append("\n");
 		result.append(String.format(format, headers.toArray(new String[0]))).append("\n");
 		result.append(headerLine).append("\n");
-		// append rows
+		
+		// Append data rows
 		for (List<String> row : rows) {
 			result.append(String.format(format, row.toArray(new String[0]))).append("\n");
 		}
-		// append line
+		
+		// Aappend line
 		result.append(headerLine).append("\n");
+		
 		return result.toString();
 	}
 

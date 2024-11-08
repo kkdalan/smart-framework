@@ -14,16 +14,18 @@ public class CustomerEventManagerTest {
 
 		// 模擬事件處理
 		// 客戶相關事件
-		Event event = new EventImpl("CUST001", "客戶註冊", EventType.CustomerRegistered);
-		event = new EventImpl("CUST002", "客戶更新", EventType.CustomerUpdated);
-		event = new EventImpl("CUST003", "客戶刪除", EventType.CustomerDeleted);
-
 		try {
 
-			// 事件發送
+			Event event = new EventImpl("CUST001", "客戶註冊", EventType.CustomerRegistered);
 			customerManager.publishEvent(event);
-
-			// 事件消費
+			customerManager.consumeEvent(event);
+			
+			event = new EventImpl("CUST002", "客戶更新", EventType.CustomerUpdated);
+			customerManager.publishEvent(event);
+			customerManager.consumeEvent(event);
+			
+			event = new EventImpl("CUST003", "客戶刪除", EventType.CustomerDeleted);
+			customerManager.publishEvent(event);
 			customerManager.consumeEvent(event);
 
 			// 統計資訊

@@ -24,9 +24,11 @@ public abstract class AbstractEventHandler<S extends State> implements EventHand
 	public void consumeEvent(Event event) {
 		try {
 			EventType eventType = event.getEventType();
-			System.out.println("接收事件: " + event.getEventId() + ", 當前狀態: " + currentState);
+			
+			System.out.print("接收事件: " + event.getEventId() + ", 當前狀態: " + currentState);
 			S nextState = stateMachine.getNextState(currentState, eventType);
-			System.out.println("狀態轉換: " + currentState + " -> " + nextState + " 事件: " + eventType);
+			nextState = (nextState != null) ? nextState : getErrorState();
+			System.out.println("  狀態轉換: " + currentState + " -> " + nextState + " 事件: " + eventType);
 
 			// 更新當前狀態
 			currentState = nextState;
@@ -40,5 +42,9 @@ public abstract class AbstractEventHandler<S extends State> implements EventHand
 	}
 
 	protected abstract void triggerNextEvent(S state);
+	
+	protected abstract S getErrorState();
+	
+	
 
 }

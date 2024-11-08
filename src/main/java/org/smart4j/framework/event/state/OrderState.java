@@ -13,4 +13,5 @@ public enum OrderState implements State{
     FAILED,       // 配送失敗
     CANCELLED,    // 訂單取消
     RETURNED,     // 訂單退貨
+    ERROR,        // 錯誤
 }

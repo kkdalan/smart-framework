@@ -7,4 +7,5 @@ public enum PaymentState implements State{
     COMPLETED,    // 付款完成
     FAILED,       // 付款失敗
     REFUNDED,     // 退款處理
+    ERROR,        // 錯誤
 }

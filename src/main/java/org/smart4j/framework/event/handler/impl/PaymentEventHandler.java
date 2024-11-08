@@ -37,5 +37,10 @@ public class PaymentEventHandler extends AbstractEventHandler<PaymentState> {
 			break;
 		}
 	}
+	
+	@Override
+	protected PaymentState getErrorState() {
+		return PaymentState.ERROR;
+	}
 
 }

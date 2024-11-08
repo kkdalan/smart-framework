@@ -32,4 +32,9 @@ public class CustomerEventHandler extends AbstractEventHandler<CustomerState> {
 		}
 	}
 
+	@Override
+	protected CustomerState getErrorState() {
+		return CustomerState.ERROR;
+	}
+
 }

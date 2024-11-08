@@ -5,5 +5,6 @@ public enum ShipmentState implements State{
     IN_TRANSIT,   // 出貨運送中
     DELIVERED,    // 已送達
     DELAYED,      // 出貨延遲
-    LOST,          // 出貨丟失
+    LOST,         // 出貨丟失
+    ERROR,        // 錯誤
 }
