@@ -26,10 +26,10 @@ public abstract class AbstractEventHandler<S extends State> implements EventHand
 
 			EventType eventType = event.getEventType();
 
-			System.out.print("接收事件: " + event.getEventType() + " (ID=" + event.getEventId() + ") , 狀態: " + currentState);
+			System.out.println("接收事件: " + event.getEventType() + " (ID=" + event.getEventId() + ") , 狀態: " + currentState);
 			S nextState = stateMachine.getNextState(currentState, eventType);
 			nextState = (nextState != null) ? nextState : getErrorState();
-			System.out.println(" ==> " + nextState);
+			System.out.println("狀態轉換: " + currentState + " ==> " + nextState);
 
 			// 更新當前狀態
 			currentState = nextState;

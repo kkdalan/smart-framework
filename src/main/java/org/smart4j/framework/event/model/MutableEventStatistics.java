@@ -56,32 +56,32 @@ public class MutableEventStatistics implements EventStatistics {
 	}
 
 	@Override
-	public long getProduced() {
+	public long getProduceSuccess() {
 		return produced.sum();
 	}
 
 	@Override
-	public long getProductionFailures() {
+	public long getProduceFailure() {
 		return productionFailures.sum();
 	}
 
 	@Override
-	public long getProducedLatency(TimeUnit unit) {
+	public long getProduceLatency(TimeUnit unit) {
 		return unit.convert(producedLatency.sum(), TimeUnit.NANOSECONDS);
 	}
 
 	@Override
-	public long getConsumed() {
+	public long getConsumeSuccess() {
 		return consumed.sum();
 	}
 
 	@Override
-	public long getConsumptionFailures() {
+	public long getConsumeFailure() {
 		return consumptionFailures.sum();
 	}
 
 	@Override
-	public long getConsumedLatency(TimeUnit unit) {
+	public long getConsumeLatency(TimeUnit unit) {
 		return unit.convert(consumedLatency.sum(), TimeUnit.NANOSECONDS);
 	}
 
@@ -125,32 +125,32 @@ public class MutableEventStatistics implements EventStatistics {
 		}
 
 		@Override
-		public long getProduced() {
+		public long getProduceSuccess() {
 			return produced;
 		}
 
 		@Override
-		public long getProductionFailures() {
+		public long getProduceFailure() {
 			return productionFailures;
 		}
 
 		@Override
-		public long getProducedLatency(TimeUnit unit) {
+		public long getProduceLatency(TimeUnit unit) {
 			return unit.convert(producedLatency, TimeUnit.NANOSECONDS);
 		}
 
 		@Override
-		public long getConsumed() {
+		public long getConsumeSuccess() {
 			return consumed;
 		}
 
 		@Override
-		public long getConsumptionFailures() {
+		public long getConsumeFailure() {
 			return consumptionFailures;
 		}
 
 		@Override
-		public long getConsumedLatency(TimeUnit unit) {
+		public long getConsumeLatency(TimeUnit unit) {
 			return unit.convert(consumedLatency, TimeUnit.NANOSECONDS);
 		}
 

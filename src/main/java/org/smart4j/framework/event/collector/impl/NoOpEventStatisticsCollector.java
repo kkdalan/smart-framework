@@ -75,32 +75,32 @@ public enum NoOpEventStatisticsCollector implements EventStatisticsCollector {
 		}
 
 		@Override
-		public long getProduced() {
+		public long getProduceSuccess() {
 			return 0;
 		}
 
 		@Override
-		public long getProductionFailures() {
+		public long getProduceFailure() {
 			return 0;
 		}
 
 		@Override
-		public long getProducedLatency(TimeUnit unit) {
+		public long getProduceLatency(TimeUnit unit) {
 			return 0;
 		}
 
 		@Override
-		public long getConsumed() {
+		public long getConsumeSuccess() {
 			return 0;
 		}
 
 		@Override
-		public long getConsumptionFailures() {
+		public long getConsumeFailure() {
 			return 0;
 		}
 
 		@Override
-		public long getConsumedLatency(TimeUnit unit) {
+		public long getConsumeLatency(TimeUnit unit) {
 			return 0;
 		}
 

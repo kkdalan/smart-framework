@@ -5,26 +5,29 @@ import org.smart4j.framework.event.model.Event;
 
 public class UnsupportedEventHandler implements EventHandler {
 
-    // 私有建構子，防止外部直接創建實例
-    private UnsupportedEventHandler() {}
+	// 私有建構子，防止外部直接創建實例
+	private UnsupportedEventHandler() {
+	}
 
-    // 靜態內部類，持有唯一的實例
-    private static class SingletonHolder {
-        private static final UnsupportedEventHandler INSTANCE = new UnsupportedEventHandler();
-    }
+	// 靜態內部類，持有唯一的實例
+	private static class SingletonHolder {
+		private static final UnsupportedEventHandler INSTANCE = new UnsupportedEventHandler();
+	}
 
-    // 公共方法，提供唯一的實例
-    public static UnsupportedEventHandler getInstance() {
-        return SingletonHolder.INSTANCE;
-    }
+	// 公共方法，提供唯一的實例
+	public static UnsupportedEventHandler getInstance() {
+		return SingletonHolder.INSTANCE;
+	}
 
-    @Override
-    public void publishEvent(Event event) {
-        System.err.println("Event handling not supported for event type: " + event.getEventType());
-    }
-    
-    @Override
-    public void consumeEvent(Event event) {
-        System.err.println("Event handling not supported for event type: " + event.getEventType());
-    }
+	@Override
+	public void publishEvent(Event event) {
+		throw new RuntimeException("Event handling not supported for event type: " + event.getEventType() + "(ID"
+				+ event.getEventId() + ")");
+	}
+
+	@Override
+	public void consumeEvent(Event event) {
+		throw new RuntimeException("Event handling not supported for event type: " + event.getEventType() + "(ID"
+				+ event.getEventId() + ")");
+	}
 }

@@ -7,17 +7,17 @@ public interface EventStatistics {
 	
 	String getEventType();
 
-	long getProduced();
+	long getProduceSuccess();
 
-	long getProductionFailures();
+	long getProduceFailure();
 
-	long getProducedLatency(TimeUnit unit);
+	long getProduceLatency(TimeUnit unit);
 
-	long getConsumed();
+	long getConsumeSuccess();
 
-	long getConsumptionFailures();
+	long getConsumeFailure();
 
-	long getConsumedLatency(TimeUnit unit);
+	long getConsumeLatency(TimeUnit unit);
 
 	Instant getAliveSince();
 

@@ -46,22 +46,17 @@ public class AbstractStateEventManager<S extends State> implements EventManager 
 	public void publishEvent(Event event) throws Exception {
 		EventType eventType = event.getEventType();
 		EventHandler handler = getEventHandler(eventType);
-		
-		if (handler != null) {
-			executorService.submit(() -> {
-				try {
-					long startTime = System.nanoTime();
-					handler.publishEvent(event);
-					long endTime = System.nanoTime();
-					statisticsCollector.incProducedEvents(eventType);
-					statisticsCollector.incProductionLatency(eventType, endTime - startTime);
-				} catch (Exception e) {
-					statisticsCollector.incFailedProduction(eventType);
-				}
-			});
-		} else {
-			throw new IllegalArgumentException("No handler found for event type: " + eventType);
-		}
+		executorService.submit(() -> {
+			try {
+				long startTime = System.nanoTime();
+				handler.publishEvent(event);
+				long endTime = System.nanoTime();
+				statisticsCollector.incProducedEvents(eventType);
+				statisticsCollector.incProductionLatency(eventType, endTime - startTime);
+			} catch (Exception e) {
+				statisticsCollector.incFailedProduction(eventType);
+			}
+		});
 	}
 
 	// 消費事件
@@ -69,23 +64,19 @@ public class AbstractStateEventManager<S extends State> implements EventManager 
 	public void consumeEvent(Event event) throws Exception {
 		EventType eventType = event.getEventType();
 		EventHandler handler = getEventHandler(eventType);
-		if (handler != null) {
-			executorService.submit(() -> {
-				try {
-					long startTime = System.nanoTime();
-					handler.consumeEvent(event);
-					long endTime = System.nanoTime();
-					statisticsCollector.incConsumedEvents(eventType);
-					statisticsCollector.incConsumptionLatency(eventType, endTime - startTime);
-				} catch (Exception e) {
-					statisticsCollector.incFailedConsumption(eventType);
-				}
-			});
-		} else {
-			throw new IllegalArgumentException("No handler found for event type: " + eventType);
-		}
+		executorService.submit(() -> {
+			try {
+				long startTime = System.nanoTime();
+				handler.consumeEvent(event);
+				long endTime = System.nanoTime();
+				statisticsCollector.incConsumedEvents(eventType);
+				statisticsCollector.incConsumptionLatency(eventType, endTime - startTime);
+			} catch (Exception e) {
+				statisticsCollector.incFailedConsumption(eventType);
+			}
+		});
 	}
-	
+
 	private EventHandler getEventHandler(EventType eventType) {
 		return eventHandlers.getOrDefault(eventType, UnsupportedEventHandler.getInstance());
 	}
@@ -98,7 +89,7 @@ public class AbstractStateEventManager<S extends State> implements EventManager 
 
 	@Override
 	public void displayEventStatistics() {
-		
+
 		DataTable dt = new DataTable("事件統計");
 
 		dt.columns().add("事件類型");
@@ -110,26 +101,27 @@ public class AbstractStateEventManager<S extends State> implements EventManager 
 		dt.columns().add("消費延遲");
 		dt.columns().add("存活時間");
 		dt.columns().add("最後重設");
-		
+
 		eventHandlers.keySet().forEach(type -> {
-			
-			EventStatistics stat = statisticsCollector.getEventStatistics(type);
-			
-			DataRow dr = dt.newRow();
-			dr.setValue("事件類型",stat.getEventType());
-			dr.setValue("發送成功",stat.getProduced());
-			dr.setValue("發送失敗",stat.getProductionFailures());
-			dr.setValue("發送延遲",stat.getProducedLatency(TimeUnit.MILLISECONDS));
-			dr.setValue("消費成功",stat.getConsumed());
-			dr.setValue("消費失敗",stat.getConsumptionFailures());
-			dr.setValue("消費延遲",stat.getConsumedLatency(TimeUnit.MILLISECONDS));
-			dr.setValue("存活時間",stat.getAliveSince());
-			dr.setValue("最後重設",stat.getLastReset());
-			
-			dt.rows().add(dr);
-			
+
+		    EventStatistics stat = statisticsCollector.getEventStatistics(type);
+
+		    DataRow dr = dt.newRow();
+		    dr.setValue("事件類型", stat.getEventType());
+		    dr.setValue("發送成功", stat.getProduceSuccess());
+		    dr.setValue("發送失敗", stat.getProduceFailure());
+		    dr.setValue("發送延遲", stat.getProduceLatency(TimeUnit.MILLISECONDS));
+		    dr.setValue("消費成功", stat.getConsumeSuccess());
+		    dr.setValue("消費失敗", stat.getConsumeFailure());
+		    dr.setValue("消費延遲", stat.getConsumeLatency(TimeUnit.MILLISECONDS));
+		    dr.setValue("存活時間", stat.getAliveSince());
+		    dr.setValue("最後重設", stat.getLastReset());
+
+		    dt.rows().add(dr);
 		});
-		
+
+
+
 		dt.print();
 
 	}
