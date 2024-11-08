@@ -78,7 +78,7 @@ public class AbstractStateEventManager<S extends State> implements EventManager 
 	}
 
 	private EventHandler getEventHandler(EventType eventType) {
-		return eventHandlers.getOrDefault(eventType, UnsupportedEventHandler.getInstance());
+		return eventHandlers.getOrDefault(eventType, UnsupportedEventHandler.INSTANCE);
 	}
 
 	// 獲取事件統計資料
