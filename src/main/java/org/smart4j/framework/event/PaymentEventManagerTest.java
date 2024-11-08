@@ -13,12 +13,18 @@ public class PaymentEventManagerTest {
 		PaymentEventManager paymentManager = new PaymentEventManager(new PaymentStateMachine());
 
 		// 模擬事件處理
-		Event event = new EventImpl("PA0001", "準備付款", EventType.PaymentReady);
+
+		// 付款相關事件
+		Event event = new EventImpl("PAY001", "付款啟動", EventType.PaymentReady);
+		event = new EventImpl("PAY002", "付款完成", EventType.PaymentCompleted);
+		event = new EventImpl("PAY003", "付款失敗", EventType.PaymentFailed);
+		event = new EventImpl("PAY004", "付款退款", EventType.PaymentRefunded);
+
 		try {
-			
+
 			// 事件發送
 			paymentManager.publishEvent(event);
-			
+
 			// 事件消費
 			paymentManager.consumeEvent(event);
 

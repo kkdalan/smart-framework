@@ -13,12 +13,16 @@ public class CustomerEventManagerTest {
 		CustomerEventManager customerManager = new CustomerEventManager(new CustomerStateMachine());
 
 		// 模擬事件處理
-		Event event = new EventImpl("CT0001", "客戶已註冊", EventType.CustomerRegistered);
+		// 客戶相關事件
+		Event event = new EventImpl("CUST001", "客戶註冊", EventType.CustomerRegistered);
+		event = new EventImpl("CUST002", "客戶更新", EventType.CustomerUpdated);
+		event = new EventImpl("CUST003", "客戶刪除", EventType.CustomerDeleted);
+
 		try {
-			
+
 			// 事件發送
 			customerManager.publishEvent(event);
-			
+
 			// 事件消費
 			customerManager.consumeEvent(event);
 
