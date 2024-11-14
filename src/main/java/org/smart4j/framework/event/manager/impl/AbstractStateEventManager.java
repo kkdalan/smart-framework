@@ -120,8 +120,6 @@ public class AbstractStateEventManager<S extends State> implements EventManager 
 		    dt.rows().add(dr);
 		});
 
-
-
 		dt.print();
 
 	}
